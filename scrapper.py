@@ -42,14 +42,15 @@ def get_stock(url, model):
             stock = child.text
 
     screenshot_path = get_datetime()
-    take_screenshot(driver, f'img/{screenshot_path}')
-    return {"name" : item_name, "stock" : stock, "model" : model}
+    screenshot_path = f'img/{screenshot_path}.png'
+    take_screenshot(driver, screenshot_path)
+    return {"name" : item_name, "stock" : stock, "model" : model, "image" : screenshot_path}
 
 #DRIVER IS NOT INPUT YET
 def take_screenshot(driver, screenshot_path):
-    driver.save_screenshot(f"{str(screenshot_path)}.png")
+    driver.save_screenshot(str(screenshot_path))
 
 def get_datetime():
     now = datetime.datetime.now()
-    formatted_datetime = now.strftime("%d.%m.%Y-%Hh-%M")
+    formatted_datetime = now.strftime("%d.%m.%Y-%Hh%Mm%Ss")
     return formatted_datetime
