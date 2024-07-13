@@ -15,30 +15,41 @@ def setup_driver():
     driver = webdriver.Firefox(service=service, options=options)
     return driver
 
-def get_stock(url=None):
-    driver = setup_driver
+def get_stock(url, model):
+    driver = setup_driver()
     driver.maximize_window()
-    driver.get("https://www.varusteleka.com/en/product/sarma-tst-cp15-combat-pack-w-flat-shoulder-straps/75036")
+    driver.get(url)
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH,"/html/body/div[4]")))
     cookies_btn = driver.find_element(By.XPATH, '//*[@id="accept_necessary_cookies"]')
     cookies_btn.click()
+
+    item_name = driver.find_element(By.TAG_NAME, "h1").text
+
     time.sleep(random.random())
     driver.execute_script("window.scrollBy(0, 220);")
     time.sleep(random.random())
     backpack_types = driver.find_elements(By.CLASS_NAME, "vt_n")
+    
     snow_camo_section = None
     for type in backpack_types:
-        if type.text == "M05 Snow Camo":
-            print(type.text)
+        if type.text == model:
             snow_camo_section = type.find_element(By.XPATH, "..")
     snow_camo_section_children = snow_camo_section.find_elements(By.XPATH, "./*")
+    
+    stock = None
     for child in snow_camo_section_children:
         if child.get_attribute("class") == "variation_saldo":
-            print(child.text)
+            stock = child.text
+
+    screenshot_path = get_datetime()
+    take_screenshot(driver, f'img/{screenshot_path}')
+    return {"name" : item_name, "stock" : stock, "model" : model}
 
 #DRIVER IS NOT INPUT YET
-def take_screenshot(driver):
+def take_screenshot(driver, screenshot_path):
+    driver.save_screenshot(f"{str(screenshot_path)}.png")
+
+def get_datetime():
     now = datetime.datetime.now()
     formatted_datetime = now.strftime("%d.%m.%Y-%Hh-%M")
-    screenshot_path = formatted_datetime
-    driver.save_screenshot(f"{str(screenshot_path)}.png")
+    return formatted_datetime
