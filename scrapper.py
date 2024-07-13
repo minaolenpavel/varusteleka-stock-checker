@@ -9,10 +9,10 @@ import datetime
 import os
 
 def setup_driver():
-    service = Service(executable_path=r"C:\Program Files (x86)\geckodriver.exe")
+    service = Service(executable_path=r"/usr/local/bin/geckodriver")
     options = webdriver.FirefoxOptions()
     options.add_argument("--headless")
-    options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
+    options.binary_location = r"/usr/bin/firefox"
     driver = webdriver.Firefox(service=service, options=options)
     return driver
 

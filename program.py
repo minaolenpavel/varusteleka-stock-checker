@@ -18,7 +18,5 @@ def Main():
             await message_sender.send_telegram_message(secret.bot_token, secret.chat_id, message, item["image"])
     asyncio.run(send_messages())
 
-
-
 if __name__ == "__main__":
     Main()
