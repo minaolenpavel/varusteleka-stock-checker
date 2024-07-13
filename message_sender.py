@@ -1,5 +1,6 @@
 import asyncio
 from telegram import Bot
+import secret
 
 async def send_telegram_message(bot_token, chat_id, message):
     bot = Bot(token=bot_token)
@@ -7,8 +8,8 @@ async def send_telegram_message(bot_token, chat_id, message):
     print("Message sent!")
 
 # Your bot token and chat ID
-bot_token = 'secret'
-chat_id = '1secret'
+bot_token = secret.bot_token
+chat_id = secret.chat_id
 
 # The message you want to send
 message = "Hello from Python via Telegram!"

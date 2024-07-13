@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import random
+import datetime
 
 
 service = Service(executable_path=r"C:\Program Files (x86)\geckodriver.exe")
@@ -19,7 +20,7 @@ cookies = WebDriverWait(driver, 5).until(
 cookies_btn = driver.find_element(By.XPATH, '//*[@id="accept_necessary_cookies"]')
 cookies_btn.click()
 time.sleep(random.random())
-driver.execute_script("window.scrollBy(0, 500);")
+driver.execute_script("window.scrollBy(0, 220);")
 time.sleep(random.random())
 backpack_types = driver.find_elements(By.CLASS_NAME, "vt_n")
 snow_camo_section = None
@@ -31,3 +32,8 @@ snow_camo_section_children = snow_camo_section.find_elements(By.XPATH, "./*")
 for child in snow_camo_section_children:
     if child.get_attribute("class") == "variation_saldo":
         print(child.text)
+
+now = datetime.datetime.now()
+formatted_datetime = now.strftime("%d.%m.%Y-%Hh-%M")
+screenshot_path = formatted_datetime
+driver.save_screenshot(f"{str(screenshot_path)}.png")
