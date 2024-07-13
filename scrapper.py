@@ -30,6 +30,9 @@ for type in backpack_types:
     if type.text == "M05 Snow Camo":
         print(type.text)
         snow_camo_section = type.find_element(By.XPATH, "..")
-
+snow_camo_section_children = snow_camo_section.find_elements(By.XPATH, "./*")
+for child in snow_camo_section_children:
+    if child.get_attribute("class") == "variation_saldo":
+        print(child.text)
 
 
