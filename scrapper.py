@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import random
 import datetime
+import os
 
 def setup_driver():
     service = Service(executable_path=r"C:\Program Files (x86)\geckodriver.exe")
@@ -48,7 +49,12 @@ def get_stock(url, model):
 
 #DRIVER IS NOT INPUT YET
 def take_screenshot(driver, screenshot_path):
-    driver.save_screenshot(str(screenshot_path))
+    if os.path.isdir("./img/"):
+        driver.save_screenshot(str(screenshot_path))
+    else:
+        os.mkdir("./img/")
+        driver.save_screenshot(str(screenshot_path))
+
 
 def get_datetime():
     now = datetime.datetime.now()
