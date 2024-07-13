@@ -1,11 +1,8 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait, Select
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException, StaleElementReferenceException
 import time
 import random
 
@@ -34,5 +31,3 @@ snow_camo_section_children = snow_camo_section.find_elements(By.XPATH, "./*")
 for child in snow_camo_section_children:
     if child.get_attribute("class") == "variation_saldo":
         print(child.text)
-
-
