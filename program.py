@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import message_sender
 import scrapper
 import secret
