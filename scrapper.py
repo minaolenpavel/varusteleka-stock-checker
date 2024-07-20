@@ -43,8 +43,9 @@ def get_stock(url, model):
             stock = child.text
 
     screenshot_path = get_datetime()
-    screenshot_path = f'img/{screenshot_path}.png'
+    screenshot_path = f'./img/{screenshot_path}.png'
     take_screenshot(driver, screenshot_path)
+    driver.quit()
     return {"name" : item_name, "stock" : stock, "model" : model, "image" : screenshot_path}
 
 #DRIVER IS NOT INPUT YET
